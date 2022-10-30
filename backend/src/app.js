@@ -17,7 +17,7 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')));// in this
 
 
 // routes
-const router = require('./routes/Router.route');
+const router = require('./routes/Router');
 
 app.use(router);
 

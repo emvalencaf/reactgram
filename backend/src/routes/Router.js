@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express();
 
-// test route
 
+// users routes
+router.use('/api/users', require('./user/User.routes'));
+
+// test route
 router.get("/", (req, res) => {
 
     res.send('API working!!');

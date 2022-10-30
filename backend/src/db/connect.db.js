@@ -1,3 +1,4 @@
+// modules
 const mongoose = require('mongoose');
 
 //users
@@ -8,6 +9,9 @@ const dbPassword = process.env.DB_PASS;
 
 const connectDB = async () => {
 
+    console.log('user', dbUser);
+    console.log('pass', dbPassword);
+    
     try{
 
         const dbConn = await mongoose.connect(
