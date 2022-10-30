@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: false}));// to work with form data
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));// if API and front-end will run in different domains get this line commented.
 
 // Upload directory
-app.use('/uploads', express.static(pathjoin(__dirname, '/uploads')));// in this directory will be saved the photos of our project
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));// in this directory will be saved the photos of our project
 
 
 
