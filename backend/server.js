@@ -1,17 +1,25 @@
 require('dotenv').config();
 
 const app = require('./src/app');
-
+const connectDB = require('./src/db/connect.db');
 
 const PORT = process.env.PORT || 3000;
+const URL = process.env.MONGO_URL;
 
-const main = () => {
+const main = async () => {
 
-    app.listen(PORT, () => {
+    try{
+        
+        await connectDB(URL);
+        app.listen(PORT, () => {
+            console.log(`O app está rodando na porta ${PORT}`);
+        });
 
-        console.log(`O app está rodando na porta ${PORT} e na url: http://localhost:${PORT}/`);
+    } catch(err){
 
-    });
+        console.error(err);
+
+    };
 
 };
 
