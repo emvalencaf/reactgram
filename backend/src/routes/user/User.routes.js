@@ -9,7 +9,8 @@ const {
     register,
     login,
     getCurrentUser,
-    updateUser
+    updateUser,
+    getUserById
 } = require('../../controllers/User.controller');
 
 // Middlewares
@@ -53,6 +54,7 @@ router.put('/',
     updateUser
 );
 
+router.get("/:id", getUserById);
 
 
 module.exports = router;
