@@ -14,8 +14,6 @@ app.use(cors({credentials: true, origin: 'http://localhost:3000'}));// if API an
 // Upload directory
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));// in this directory will be saved the photos of our project
 
-
-
 // routes
 const router = require('./routes/Router');
 
