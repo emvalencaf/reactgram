@@ -108,7 +108,9 @@ const updateUser = async(req, res) => {
 
     let profileImage = null;
 
-    if(req.file) profileImage = req.file.filename;
+    if(req.file) {
+        profileImage = req.file.filename;
+    };
 
     // User's data get by the authGuard
     const reqUser = req.user

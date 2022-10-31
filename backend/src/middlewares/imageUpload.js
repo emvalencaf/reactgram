@@ -36,6 +36,8 @@ const imageUpload = multer({
         console.log('---- on imageUpload middleware');
         console.log('file original name: ', file.originalname);
         console.log('file: ', file);
+        console.log('req.file: ', req.file);
+        
         cb(undefined, true);
     }
 });
