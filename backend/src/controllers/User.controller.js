@@ -142,13 +142,13 @@ const getUserById = async (req, res) => {
         const user = await User.findById(mongoose.Types.ObjectId(id)).select('-password');
 
         // Check if user exists
-        if(!user) return res.status(404).json({erors:["Usuário não encontrado."]});
+        if(!user) return res.status(404).json({errors:["Usuário não encontrado."]});
     
         res.status(200).json(user);
 
     } catch(err){
 
-        res.status(404).json({erors:["Usuário não encontrado."]});
+        res.status(404).json({errors:["Usuário não encontrado."]});
 
     };
 

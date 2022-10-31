@@ -33,6 +33,9 @@ const imageUpload = multer({
         // Upload only png and jpg formats
         if(!file.originalname.match(/\.(png|jpg)$/)) return cb(new Error('Por favor, envie apenas png ou jpg!'));
 
+        console.log('---- on imageUpload middleware');
+        console.log('file original name: ', file.originalname);
+        console.log('file: ', file);
         cb(undefined, true);
     }
 });
