@@ -8,9 +8,6 @@ const dbPassword = process.env.DB_PASS;
 // connection with Mongoose
 
 const connectDB = async () => {
-
-    console.log('user', dbUser);
-    console.log('pass', dbPassword);
     
     try{
 

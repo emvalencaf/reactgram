@@ -1,7 +1,8 @@
 // modules
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-    // model
+const mongoose = require('mongoose');
+// model
 const User = require('../models/User.model');
 
 // AUTH
@@ -32,8 +33,10 @@ const register = async (req, res) => {
     if(user) return res.status(422).json({errors:["Por favor, utilizar um e-mail não registrado."]});
 
     // Generate password hash
-    const salt = await bcrypt.genSalt();
-    const passwordHash = await bcrypt.hash(password, salt);
+
+    //const salt = await bcrypt.genSalt();
+    //const passwordHash = await bcrypt.hash(password, salt);
+    const passwordHash = encryptPassword(password);
 
     // Create user
     const newUser = await User.create({
@@ -89,8 +92,50 @@ const getCurrentUser = async (req, res) => {
 
 };
 
+// encrypt passoword
+
+const encryptPassword =  async (password) => {
+
+    const salt = await bcrypt.genSalt();
+    return await bcrypt.hash(password, salt);
+
+};
+
+// Update an user
+const updateUser = async(req, res) => {
+
+    const { name, password, bio } = req.body;
+
+    let profileImage = null;
+
+    if(req.file) profileImage = req.file.filename;
+
+    // User's data get by the authGuard
+    const reqUser = req.user
+
+    const user = await User.findById(mongoose.Types.ObjectId(reqUser._id)).select("-password");
+
+    if(name) user.name = name;
+
+    if(password) {
+        const passwordHash = await encryptPassword(password);
+        user.password = passwordHash;
+    };
+
+    if(profileImage) user.profileImage = profileImage;
+
+    if(bio) user.bio = bio;
+
+    await user.save();
+
+    res.status(200).json(user);
+};
+
+
+
 module.exports={
     register,
     login,
-    getCurrentUser
+    getCurrentUser,
+    updateUser
 }

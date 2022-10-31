@@ -19,7 +19,7 @@ const authGuard = async (req, res, next) => {
 
         const verified = jwt.verify(token, jwtSecret);
 
-        req.user = await User.findById(verified._id).select("-password");
+        req.user = await User.findById(verified.id).select("-password");
 
         next();
 
