@@ -47,28 +47,28 @@ const Register = () => {
           type="text"
           name="name"
           placeholder="Nome"
-          value={name}
+          value={name || ""}
           onChange={(e) => setName(e.target.value)}
         />
         <input
           type="email"
           name="email"
           placeholder='E-mail'
-          value={email}
+          value={email || ""}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           name="password"
           placeholder='Senha'
-          value={password}
+          value={password || ""}
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
           type="password"
           name="confirmpassword"
           placeholder='Confirme a senha'
-          value={confirmpassword}
+          value={confirmpassword || ""}
           onChange={(e) => setConfirmpassword(e.target.value)}
         />
         <button type='submit'>Cadastrar</button>
