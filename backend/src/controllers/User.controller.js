@@ -25,18 +25,25 @@ const generateToken = (id) => {
     // Register user and sign in
 const register = async (req, res) => {
 
+    console.log('entrou na função register');
     const { name, email, password } = req.body
+
+    console.log('copor da requisição', req.body)
 
     // check if user exists
     const user = await User.findOne({email});
+
+    console.log("há usuário?", user);
 
     if(user) return res.status(422).json({errors:["Por favor, utilizar um e-mail não registrado."]});
 
     // Generate password hash
 
-    //const salt = await bcrypt.genSalt();
-    //const passwordHash = await bcrypt.hash(password, salt);
-    const passwordHash = encryptPassword(password);
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(password, salt);
+    //const passwordHash = encryptPassword(password);
+
+    console.log('hash da senha', passwordHash);
 
     // Create user
     const newUser = await User.create({
@@ -96,7 +103,12 @@ const getCurrentUser = async (req, res) => {
 
 const encryptPassword =  async (password) => {
 
+    console.log('entrou na encryptPassword');
+
     const salt = await bcrypt.genSalt();
+
+    console.log('gerou o salt?', salt);
+
     return await bcrypt.hash(password, salt);
 
 };
@@ -131,7 +143,7 @@ const updateUser = async(req, res) => {
     await user.save();
 
     res.status(200).json(user);
-};
+}; 
 
 // Get user by id
 const getUserById = async (req, res) => {

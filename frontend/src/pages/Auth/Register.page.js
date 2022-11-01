@@ -6,11 +6,17 @@ import { Link } from 'react-router-dom';
 // Hooks
 import { useState, useEffect } from 'react';
 
-// Components
+// Redux
+import { register, reset } from '../../slices/auth.slice';
+
+
+// components
+import Message from '../../components/Message.component';
 
 
 // styles
 import './Auth.css';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Register = () => {
@@ -18,7 +24,13 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmpassword, setConfirmpassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const {loading, error} = useSelector((state) => state.auth);
+
+
 
   const handleSubmit = (e) => {
 
@@ -28,13 +40,21 @@ const Register = () => {
       name,
       email,
       password,
-      confirmpassword
+      confirmPassword
     };
 
     console.log(user);
 
+    dispatch(register(user));
+
   };
 
+  // Clean all auth states
+  useEffect(() => {
+
+    dispatch(reset());
+
+  }, [dispatch]);
 
   return (
     <div id='register'>
@@ -68,10 +88,12 @@ const Register = () => {
           type="password"
           name="confirmpassword"
           placeholder='Confirme a senha'
-          value={confirmpassword || ""}
-          onChange={(e) => setConfirmpassword(e.target.value)}
+          value={confirmPassword || ""}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <button type='submit'>Cadastrar</button>
+        {!loading && <button type='submit'>Cadastrar</button>}
+        {loading && <button type='submit' disabled>Aguarde...</button>}
+        {error && <Message msg={error} type="error" />}
       </form>
       <p>
         Já tem conta? <Link
