@@ -7,7 +7,7 @@ export const useAuth = () => {
     const { user } = useSelector((state) => state.auth);
 
     const [ auth, setAuth ] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [ loading, setLoading ] = useState(true);
 
     useEffect(() => {
 
@@ -17,5 +17,5 @@ export const useAuth = () => {
 
     }, [user]);
 
-    return [ auth, loading ];
+    return { auth, loading };
 };

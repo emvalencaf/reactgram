@@ -2,6 +2,8 @@
   // router
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
+// hooks
+import { useAuth } from './hooks/useAuth.hooks';
 
 // Components
 import Navbar from './components/Navbar.component';
@@ -17,6 +19,15 @@ import Register from './pages/Auth/Register.page';
 import './App.css';
 
 function App() {
+
+  const { auth, loading } = useAuth();
+
+  console.log(loading);
+
+  if(loading) return <p>Carregando...</p>;
+
+
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -25,15 +36,15 @@ function App() {
           <Routes>
             <Route
               path='/'
-              element={<Home />}
+              element={auth? <Home />: <Navigate to='/login' />}
             />
             <Route
               path='/login'
-              element={<Login />}
+              element={!auth? <Login />: <Navigate to='/home' />}
             />
             <Route
               path='/register'
-              element={<Register />}
+              element={!auth? <Register />: <Navigate to="/home" />}
             />
           </Routes>
         </div>

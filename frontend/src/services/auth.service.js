@@ -3,6 +3,7 @@ import { api, requestConfig } from "../utils/config.utils";
 
 // authService
 
+// register an user
 const register = async (data) => {
 
     const config = requestConfig("POST", data);
@@ -29,8 +30,16 @@ const register = async (data) => {
 
 };
 
+// log out an user;
+const logout = () => {
+
+    localStorage.removeItem("user");
+
+};
+
 const authService = {
-    register
+    register,
+    logout
 }
 
 export default authService;
