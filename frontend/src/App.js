@@ -13,6 +13,7 @@ import Footer from './components/Footer.component';
 import Home from './pages/Home/Home.page';
 import Login from './pages/Auth/Login.page';
 import Register from './pages/Auth/Register.page';
+import EditProfile from './pages/EditProfile/EditProfile.page';
 
 
 // styles
@@ -37,6 +38,10 @@ function App() {
             <Route
               path='/'
               element={auth? <Home />: <Navigate to='/login' />}
+            />
+            <Route
+              to='/editprofile'
+              element={auth? <EditProfile />: <Navigate to='/login' />}
             />
             <Route
               path='/login'
