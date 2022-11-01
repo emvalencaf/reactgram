@@ -40,7 +40,7 @@ function App() {
               element={auth? <Home />: <Navigate to='/login' />}
             />
             <Route
-              to='/editprofile'
+              path='/editprofile'
               element={auth? <EditProfile />: <Navigate to='/login' />}
             />
             <Route
