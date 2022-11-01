@@ -11,6 +11,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 // Redux
+import { login, reset } from '../../slices/auth.slice';
+
 
 // styles
 import './Auth.css';
@@ -21,12 +23,30 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
 
+  const dispatch = useDispatch();
+
+  const { loading, error } = useSelector((state) => state.auth);
+
   const handleSubmit = (e) => {
 
     e.preventDefault();
 
+    const user = {
+      email,
+      password
+    };
+
+    dispatch(login(user));
+
   };
 
+  // clean all auth states
+  useEffect(
+    () => {
+      dispatch(reset())
+    },
+    [dispatch]
+  );
 
   return (
     <div id='login'>
@@ -40,13 +60,18 @@ const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail"
+          required
         />
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="senha" 
+          placeholder="senha"
+          required
         />
+        {!loading && <button type='submit'>Login</button>}
+        {loading && <button type='submit' disabled>Aguarde...</button>}
+        {error && <Message msg={error} type="error" />}
       </form>
       <p>Não tem uma conta? <Link to="/register">Clique aqui</Link></p>
     </div>
