@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 // Redux
-import { profile, resetMessage } from '../../slices/user.slice';
+import { profile, resetMessage, updateProfile } from '../../slices/user.slice';
 
 // Uploads
 import { uploads } from '../../utils/config.utils';
@@ -31,7 +31,7 @@ const EditProfile = () => {
     const [previewImage, setPreviewImage] = useState('');
 
     // Load user data
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(profile());
     }, [dispatch]);
 
@@ -39,7 +39,7 @@ const EditProfile = () => {
     // Fill form with user data
     useEffect(() => {
 
-        if(user){
+        if (user) {
             setName(user.name);
             setEmail(user.email);
             setBio(user.bio);
@@ -61,10 +61,35 @@ const EditProfile = () => {
 
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
+        // Get user data from states
+        const userData = {
+            name
+        };
+
+        if(profileImage) userData.profileImage
+         = profileImage;
+
+         if(password) userData.password = password;
+
+         // build formdata
+         const formData = new FormData();
+
+         const userFormData = Object.keys(userData)
+            .forEach((key) => formData.append(key, userData));
+
+        formData.append("user", userFormData);
+
+        console.log(formData);
+
+        await dispatch(updateProfile(userFormData));
+
+        setTimeout(() =>{
+            dispatch(resetMessage())
+        }, 2000);
     };
 
     return (
@@ -76,9 +101,9 @@ const EditProfile = () => {
                 <img
                     className='profile-image'
                     src={
-                        previewImage?
+                        previewImage ?
                             URL.createObjectURL(previewImage)
-                            :`${uploads}/users/${user.profileImage}`
+                            : `${uploads}/users/${user.profileImage}`
                     }
                     alt={`foto de perfil de ${user.name}`}
                 />
@@ -124,6 +149,10 @@ const EditProfile = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </label>
+                {!loading && <button type='submit'>Atualizar</button>}
+                {loading && <button type='submit' disabled>Aguarde...</button>}
+                {error && <Message msg={error} type="error" />}
+                {message && <Message msg={message} />}
             </form>
         </div>
     )

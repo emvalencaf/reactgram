@@ -15,7 +15,7 @@ const authGuard = async (req, res, next) => {
 
     // Check if token is valid
     try{
-
+        
         const verified = jwt.verify(token, jwtSecret);
 
         req.user = await controller.getUserById(verified.id);

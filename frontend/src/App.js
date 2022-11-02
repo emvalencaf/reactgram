@@ -14,6 +14,7 @@ import Home from './pages/Home/Home.page';
 import Login from './pages/Auth/Login.page';
 import Register from './pages/Auth/Register.page';
 import EditProfile from './pages/EditProfile/EditProfile.page';
+import Profile from './pages/Profile/Profile.page';
 
 
 // styles
@@ -40,7 +41,11 @@ function App() {
               element={auth? <Home />: <Navigate to='/login' />}
             />
             <Route
-              path='/editprofile'
+              path='/users/:id'
+              element={auth? <Profile />:<Navigate  to='/login'/>}
+            />
+            <Route
+              path='/profile'
               element={auth? <EditProfile />: <Navigate to='/login' />}
             />
             <Route

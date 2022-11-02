@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 // Hooks
+import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 
 // Redux
@@ -16,7 +17,6 @@ import Message from '../../components/Message.component';
 
 // styles
 import './Auth.css';
-import { useDispatch, useSelector } from 'react-redux';
 
 
 const Register = () => {
@@ -101,7 +101,7 @@ const Register = () => {
         >Clique aqui</Link>
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
