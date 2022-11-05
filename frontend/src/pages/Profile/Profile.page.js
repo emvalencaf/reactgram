@@ -43,6 +43,7 @@ const Profile = () => {
 
     const { user, loading } = useSelector((state) => state.user);
     const { user: userAuth } = useSelector((state) => state.auth);
+    
     const {
         photos,
         loading: loadingPhoto,

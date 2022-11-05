@@ -71,10 +71,10 @@ const getAllPhotos = async (req, res) => {
 };
 
 // Get user photos
-const getUserPhotos = async (req, res) => {
+const getAllUserPhotos = async (req, res) => {
 
     const { id } = req.params;
-
+    console.log("dentro do backend");
     const photos = await Photo.find({userId: id})
         .sort([['createdAt', -1]])
         .exec();
@@ -196,7 +196,7 @@ module.exports = {
     insertPhoto,
     deletePhoto,
     getAllPhotos,
-    getUserPhotos,
+    getAllUserPhotos,
     getPhotoById,
     updatePhoto,
     likePhoto,

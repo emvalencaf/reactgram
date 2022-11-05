@@ -10,7 +10,7 @@ const {
     insertPhoto,
     deletePhoto,
     getAllPhotos,
-    getUserPhotos,
+    getAllUserPhotos,
     getPhotoById,
     updatePhoto,
     likePhoto,
@@ -42,25 +42,28 @@ router.post('/',
     insertPhoto
 );
 
-router.delete('/:id', authGuard, deletePhoto);
+router.delete('/:id',
+    authGuard, 
+    deletePhoto
+);
 
 router.get('/',
-    authGuard,
+//    authGuard,
     getAllPhotos
 );
 
 router.get('/user/:id',
-    authGuard,
-    getUserPhotos
+//    authGuard,
+    getAllUserPhotos
 );
 
 router.get('/search',
-    authGuard,
+//    authGuard,
     searchPhotos
 );
 
 router.get('/:id',
-    authGuard,
+//    authGuard,
     getPhotoById
 );
 
