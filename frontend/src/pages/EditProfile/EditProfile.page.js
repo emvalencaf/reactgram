@@ -1,19 +1,33 @@
 // Hooks
+<<<<<<< Updated upstream
 import { 
     useState, 
+=======
+import {
+    useState,
+>>>>>>> Stashed changes
     useEffect 
 } from 'react';
 
 import { 
+<<<<<<< Updated upstream
     useSelector, 
+=======
+    useSelector,
+>>>>>>> Stashed changes
     useDispatch 
 } from 'react-redux';
 
 
 // Redux
 import { 
+<<<<<<< Updated upstream
     profile, 
     resetMessage, 
+=======
+    profile,
+    resetMessage,
+>>>>>>> Stashed changes
     updateProfile 
 } from '../../slices/user.slice';
 
@@ -31,7 +45,12 @@ const EditProfile = () => {
 
     const dispatch = useDispatch();
 
-    const { user, message, error, loading } = useSelector((state) => state.user);
+    const { 
+        user, 
+        message, 
+        error, 
+        loading
+    } = useSelector((state) => state.user);
 
     // States
     const [name, setName] = useState('');
@@ -47,6 +66,7 @@ const EditProfile = () => {
     }, [dispatch]);
 
     console.log(user);
+
     // Fill form with user data
     useEffect(() => {
 
@@ -89,13 +109,15 @@ const EditProfile = () => {
          // build formdata
          const formData = new FormData();
 
-         const userFormData = Object.keys(userData)
-            .forEach((key) => formData.append(key, userData));
+         const userFormData = Object.keys(userData).forEach((key) => formData.append(key, userData));
 
         formData.append("user", userFormData);
 
+<<<<<<< Updated upstream
         console.log('dados compactados em  um FormData', formData);
 
+=======
+>>>>>>> Stashed changes
         await dispatch(updateProfile(userFormData));
         console.log('perfil atualizado');
         setTimeout(() =>{

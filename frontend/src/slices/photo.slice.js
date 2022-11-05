@@ -15,7 +15,9 @@ const initialState = {
 
 // functions
 // Publish user photo
-export const publishPhoto = createAsyncThunk("photo/publish", async (photo, thunkAPI) => {
+export const publishPhoto = createAsyncThunk(
+    "photo/publish",
+    async (photo, thunkAPI) => {
 
     const token = thunkAPI.getState().auth.user.token;
 
@@ -27,7 +29,7 @@ export const publishPhoto = createAsyncThunk("photo/publish", async (photo, thun
     return data;
 
 });
-// Get uses photos
+// Get user photos
 export const getUserPhotos = createAsyncThunk(
     "photo/userphotos",
     async (id, thunkAPI) => {
@@ -44,7 +46,9 @@ export const getUserPhotos = createAsyncThunk(
     }
 );
 // Delete a photo
-export const deletePhoto = createAsyncThunk('photo/delete', async (id, thunkAPI) => {
+export const deletePhoto = createAsyncThunk(
+    'photo/delete',
+    async (id, thunkAPI) => {
 
     const token = thunkAPI.getState().auth.user.token;
 
@@ -85,7 +89,7 @@ export const photoSlice = createSlice({
             .addCase(publishPhoto.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-                state.photo = {};
+                state.photo = null;
             })
             .addCase(getUserPhotos.pending, (state) => {
                 state.loading = true;

@@ -17,9 +17,16 @@ import {
     useRef 
 } from 'react';
 import { 
+<<<<<<< Updated upstream
     useSelector, 
     useDispatch 
 } from 'react-redux';
+=======
+    useSelector,
+    useDispatch 
+} from 'react-redux';
+
+>>>>>>> Stashed changes
 import { useParams } from 'react-router-dom';
 
 // Redux
@@ -30,7 +37,10 @@ import {
     getUserPhotos, 
     deletePhoto 
 } from '../../slices/photo.slice';
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
 // Styles
 import './Profile.css';
@@ -43,6 +53,7 @@ const Profile = () => {
 
     const { user, loading } = useSelector((state) => state.user);
     const { user: userAuth } = useSelector((state) => state.auth);
+
     const {
         photos,
         loading: loadingPhoto,
@@ -55,7 +66,7 @@ const Profile = () => {
 
     // New form and edit form refs
     const newPhotoForm = useRef();
-    const editPhotoForm = useRef();
+    // const editPhotoForm = useRef();
 
     // Load user data
     useEffect(() => {
@@ -71,19 +82,18 @@ const Profile = () => {
         setTimeout(() => {
             dispatch(resetMessage());
         }, 2000);
-    }
+    };
 
+    
     // Event handlers
     const handleFile = (e) => {
 
         // image preview
         const image = e.target.files[0];
 
-
         // Update image state
         setImage(image);
-
-    }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -106,7 +116,7 @@ const Profile = () => {
 
         setTitle("");
 
-        resetComponentMessage();
+        // resetComponentMessage();
     };
 
     // Delete a photo

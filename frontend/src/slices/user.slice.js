@@ -10,7 +10,9 @@ const initialState = {
 };
 
 // Get user details
-export const profile = createAsyncThunk("user/profile", async (user, thunkAPI) =>{
+export const profile = createAsyncThunk(
+    "user/profile",
+    async (user, thunkAPI) =>{
 
     // get user token
     const token = thunkAPI.getState().auth.user.token;
@@ -22,8 +24,15 @@ export const profile = createAsyncThunk("user/profile", async (user, thunkAPI) =
 });
 
 // Update user details
+<<<<<<< Updated upstream
 export const updateProfile = createAsyncThunk("user/update", async (user, thunkAPI) => {
     console.log("entramos no slice update");    
+=======
+export const updateProfile = createAsyncThunk(
+    "user/update",
+    async (user, thunkAPI) => {
+    
+>>>>>>> Stashed changes
     const token = thunkAPI.getState().auth.user.token;
     console.log('Conseguimos o token de acesso');
     const data = await userService.updateProfile(user, token);
@@ -35,9 +44,13 @@ export const updateProfile = createAsyncThunk("user/update", async (user, thunkA
 });
 
 // Get user details
-export const getUserDetails = createAsyncThunk('user/get', async (id, thunkAPI) => {
+export const getUserDetails = createAsyncThunk(
+    'user/get',
+    async (id, thunkAPI) => {
+    
+    const token = thunkAPI.getState().auth.user.token;
 
-    const data = await userService.getUserDetails(id);
+    const data = await userService.getUserDetails(id, token);
 
     return data;
 
@@ -55,7 +68,7 @@ export const userSlice = createSlice({
         builder
             .addCase(profile.pending, (state) => {
                 state.loading = true;
-                state.error = false;
+                state.error = null;
             })
             .addCase(profile.fulfilled, (state, action) => {
                 state.loading = false;
@@ -77,7 +90,7 @@ export const userSlice = createSlice({
             .addCase(updateProfile.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-                state.user = {};
+                state.user = null;
             })
             .addCase(getUserDetails.pending, (state) => {
                 state.loading = true;

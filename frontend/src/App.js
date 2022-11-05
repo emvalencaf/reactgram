@@ -24,8 +24,6 @@ function App() {
 
   const { auth, loading } = useAuth();
 
-  console.log(loading);
-
   if(loading) return <p>Carregando...</p>;
 
   return (
@@ -36,23 +34,42 @@ function App() {
           <Routes>
             <Route
               path='/'
-              element={auth? <Home />: <Navigate to='/login' />}
-            />
+              element={
+                auth?
+                  <Home />
+                  : <Navigate to='/login' />
+              }
+              />
             <Route
               path='/users/:id'
-              element={auth? <Profile />:<Navigate  to='/login'/>}
+              element={
+                auth?
+                  <Profile />
+                  :<Navigate  to='/login'/>
+              }
             />
             <Route
               path='/profile'
-              element={auth? <EditProfile />: <Navigate to='/login' />}
+              element={
+                auth?
+                  <EditProfile />
+                  : <Navigate to='/login' />
+              }
             />
             <Route
               path='/login'
-              element={!auth? <Login />: <Navigate to='/home' />}
+              element={
+                !auth?
+                  <Login />
+                  : <Navigate to='/' />
+              }
             />
             <Route
               path='/register'
-              element={!auth? <Register />: <Navigate to="/home" />}
+              element={
+                !auth?
+                  <Register />:
+                  <Navigate to="/" />}
             />
           </Routes>
         </div>
