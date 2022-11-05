@@ -25,42 +25,37 @@ const generateToken = (id) => {
     // Register user and sign in
 const register = async (req, res) => {
 
-    console.log('entrou na função register');
-    const { name, email, password } = req.body
-
-    console.log('copor da requisição', req.body)
+    console.log("entramos no controller register");
+    const { name, email, password } = req.body;
 
     // check if user exists
     const user = await User.findOne({email});
-
-    console.log("há usuário?", user);
+    console.log("Checamos se existe um usuário com o mesmo e-mail");
 
     if(user) return res.status(422).json({errors:["Por favor, utilizar um e-mail não registrado."]});
 
     // Generate password hash
-
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
     //const passwordHash = encryptPassword(password);
-
-    console.log('hash da senha', passwordHash);
-
+    console.log("geramos um password hash");
     // Create user
     const newUser = await User.create({
         name,
         email,
         password: passwordHash
     });
-
     // if user was created sucessfully, return the token
     if(!newUser) return res.status(422).json({errors:["Houve um erro, por favor tente mais tarde."]});
-
+    
+    console.log("criamos um usuário no banco de dados");
     // send new user id and token to frontend
     res.status(201).json({
         _id: newUser._id,
         token: generateToken(newUser._id)
     });
-
+    
+    console.log("enviamos o token e o id do usuário ao frontend");
 
 };
 
@@ -93,7 +88,10 @@ const login = async (req, res) => {
 // Get current logged in user
 const getCurrentUser = async (req, res) => {
 
+    console.log('entramos no getCurrentUser');
+
     const user = req.user;
+    console.log('user', user);
 
     res.status(200).json(user);
 

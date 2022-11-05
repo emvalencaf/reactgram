@@ -97,7 +97,6 @@ const Profile = () => {
     const handleDelete = (id) => {
 
         dispatch(deletePhoto(id));
-
         resetComponentMessage();
 
     };

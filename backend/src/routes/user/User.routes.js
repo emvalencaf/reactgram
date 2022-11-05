@@ -16,20 +16,18 @@ const {
 // Middlewares
 
     // validation
+        // handle validation
 const validate = require('../../middlewares/handleValidation.middleware');
 
+        // request's fields validation
 const { 
     userCreateValidation,
     loginValidation,
     userUpdateValidation
 } = require('../../middlewares/validation/User.validation');
 
-
-
     // auth
 const authGuard = require('../../middlewares/authGuard.middleware');
-
-
 
     // image
 const { imageUpload } = require('../../middlewares/imageUpload');
@@ -37,13 +35,25 @@ const { imageUpload } = require('../../middlewares/imageUpload');
 
 // routes
 
-router.post('/register', userCreateValidation(), validate, register);
+router.post('/register',
+    userCreateValidation(),
+    validate,
+    register
+);
 
 
-router.post('/login', loginValidation(), validate, login);
+router.post('/login',
+    loginValidation(),
+    validate,
+    login
+);
 
 
-router.get('/profile', authGuard, getCurrentUser);
+router.get(
+    '/profile',
+    authGuard,
+    getCurrentUser
+);
 
 
 router.put('/',
