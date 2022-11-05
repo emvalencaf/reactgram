@@ -4,16 +4,32 @@ import { uploads } from '../../utils/config.utils';
 // Components
 import Message from '../../components/Message.component';
 import { Link } from 'react-router-dom';
-import { BsFillEyeFill, BsPencilFill, BsXLg } from 'react-icons/bs';
+import { 
+    BsFillEyeFill, 
+    BsPencilFill, 
+    BsXLg 
+} from 'react-icons/bs';
 
 // Hooks
-import { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { 
+    useState, 
+    useEffect, 
+    useRef 
+} from 'react';
+import { 
+    useSelector, 
+    useDispatch 
+} from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 // Redux
 import { getUserDetails } from '../../slices/user.slice';
-import { publishPhoto, resetMessage, getUserPhotos, deletePhoto } from '../../slices/photo.slice';
+import { 
+    publishPhoto, 
+    resetMessage, 
+    getUserPhotos, 
+    deletePhoto 
+} from '../../slices/photo.slice';
 
 
 // Styles
@@ -166,7 +182,7 @@ const Profile = () => {
                                         ><BsFillEyeFill /></Link>
                                         <BsPencilFill />
                                         <BsXLg 
-                                            onClick={() => handleDelte(photo._id)}
+                                            onClick={() => handleDelete(photo._id)}
                                         />
                                     </div>
                                 )

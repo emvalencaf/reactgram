@@ -28,11 +28,11 @@ const updateProfile = async (data, token) => {
     const config = requestConfig("PUT", data, token, true);
 
     try{
-
-        const res = await fetch(api = '/users/', config)
+        console.log("entramos no service update")
+        const res = await fetch(api + '/users/', config)
             .then(res => res.json())
             .catch(err => err);
-
+        console.log("saímos do servie update:", res);
         return res;
 
     }catch (err) {

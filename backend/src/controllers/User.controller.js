@@ -113,9 +113,9 @@ const encryptPassword =  async (password) => {
 
 // Update an user
 const updateUser = async(req, res) => {
-
+    console.log("entramos no backend");
     const { name, password, bio } = req.body;
-
+    console.log("o servidor recebeu a requisição", req.bod);
     let profileImage = null;
 
     if(req.file) {
@@ -124,7 +124,7 @@ const updateUser = async(req, res) => {
 
     // User's data get by the authGuard
     const reqUser = req.user
-
+    console.log("procurado o usuário");
     const user = await User.findById(mongoose.Types.ObjectId(reqUser._id)).select("-password");
 
     if(name) user.name = name;
@@ -139,7 +139,7 @@ const updateUser = async(req, res) => {
     if(bio) user.bio = bio;
 
     await user.save();
-
+    console.log("salvo os dados e aatualizados")
     res.status(200).json(user);
 }; 
 

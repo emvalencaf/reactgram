@@ -1,10 +1,21 @@
 // Hooks
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { 
+    useState, 
+    useEffect 
+} from 'react';
+
+import { 
+    useSelector, 
+    useDispatch 
+} from 'react-redux';
 
 
 // Redux
-import { profile, resetMessage, updateProfile } from '../../slices/user.slice';
+import { 
+    profile, 
+    resetMessage, 
+    updateProfile 
+} from '../../slices/user.slice';
 
 // Uploads
 import { uploads } from '../../utils/config.utils';
@@ -83,10 +94,10 @@ const EditProfile = () => {
 
         formData.append("user", userFormData);
 
-        console.log(formData);
+        console.log('dados compactados em  um FormData', formData);
 
         await dispatch(updateProfile(userFormData));
-
+        console.log('perfil atualizado');
         setTimeout(() =>{
             dispatch(resetMessage())
         }, 2000);
@@ -94,7 +105,7 @@ const EditProfile = () => {
 
     return (
         <div id='edit-profile'>
-            <h2>Edite sesus dados</h2>
+            <h2>Edite seus dados</h2>
             <p className='subtitle'>Adicione uma imagem de perfil e conte mais sobre você...</p>
             {/* preview da image */}
             {(user.profileImage || previewImage) && (

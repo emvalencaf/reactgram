@@ -23,14 +23,14 @@ export const profile = createAsyncThunk("user/profile", async (user, thunkAPI) =
 
 // Update user details
 export const updateProfile = createAsyncThunk("user/update", async (user, thunkAPI) => {
-    
+    console.log("entramos no slice update");    
     const token = thunkAPI.getState().auth.user.token;
-
+    console.log('Conseguimos o token de acesso');
     const data = await userService.updateProfile(user, token);
-
+    console.log("voltamos ao slice update")
     // Check for errors
     if(data.errors) return thunkAPI.rejectWithValue(data.errors[0]);
-
+    console.log('saímos do slice update')
     return data;
 });
 

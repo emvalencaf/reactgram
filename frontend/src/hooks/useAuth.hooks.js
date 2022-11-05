@@ -9,7 +9,7 @@ export const useAuth = () => {
     const [ auth, setAuth ] = useState(false);
     const [ loading, setLoading ] = useState(true);
 
-    useEffect(async () => {
+    useEffect( () => {
 
         user? setAuth(true): setAuth(false);
 
