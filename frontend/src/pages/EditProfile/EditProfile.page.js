@@ -1,20 +1,20 @@
 // Hooks
-import { 
-    useState, 
-    useEffect 
+import {
+    useState,
+    useEffect
 } from 'react';
 
-import { 
-    useSelector, 
-    useDispatch 
+import {
+    useSelector,
+    useDispatch
 } from 'react-redux';
 
 
 // Redux
-import { 
-    profile, 
-    resetMessage, 
-    updateProfile 
+import {
+    profile,
+    resetMessage,
+    updateProfile
 } from '../../slices/user.slice';
 
 // Uploads
@@ -81,24 +81,24 @@ const EditProfile = () => {
             name
         };
 
-        if(profileImage) userData.profileImage
-         = profileImage;
+        if (profileImage) userData.profileImage
+            = profileImage;
 
-         if(password) userData.password = password;
+        if (password) userData.password = password;
 
-         // build formdata
-         const formData = new FormData();
+        // build formdata
+        const formData = new FormData();
 
-         const userFormData = Object.keys(userData)
-            .forEach((key) => formData.append(key, userData));
+        const userFormData = Object.keys(userData).forEach((key) =>
+            formData.append(key, userData[key])
+        );
 
         formData.append("user", userFormData);
 
-        console.log('dados compactados em  um FormData', formData);
+        await dispatch(updateProfile(formData));
 
-        await dispatch(updateProfile(userFormData));
         console.log('perfil atualizado');
-        setTimeout(() =>{
+        setTimeout(() => {
             dispatch(resetMessage())
         }, 2000);
     };

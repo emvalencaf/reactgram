@@ -115,7 +115,7 @@ const encryptPassword =  async (password) => {
 const updateUser = async(req, res) => {
     console.log("entramos no backend");
     const { name, password, bio } = req.body;
-    console.log("o servidor recebeu a requisição", req.bod);
+    console.log("o servidor recebeu a requisição", req.body);
     let profileImage = null;
 
     if(req.file) {
