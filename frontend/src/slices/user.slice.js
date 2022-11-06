@@ -24,15 +24,11 @@ export const profile = createAsyncThunk(
 });
 
 // Update user details
-<<<<<<< Updated upstream
-export const updateProfile = createAsyncThunk("user/update", async (user, thunkAPI) => {
-    console.log("entramos no slice update");    
-=======
+ 
 export const updateProfile = createAsyncThunk(
     "user/update",
     async (user, thunkAPI) => {
-    
->>>>>>> Stashed changes
+        
     const token = thunkAPI.getState().auth.user.token;
     console.log('Conseguimos o token de acesso');
     const data = await userService.updateProfile(user, token);

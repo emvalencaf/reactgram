@@ -91,6 +91,8 @@ const EditProfile = () => {
 
         if (password) userData.password = password;
 
+        if(bio) userData.bio = bio;
+
         // build formdata
         const formData = new FormData();
 
