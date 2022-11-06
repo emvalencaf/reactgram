@@ -138,10 +138,30 @@ const commentPhoto = async (data, id, token) => {
 
 };
 
+// Get all photos
+const getAllPhotos = async (token) => {
+    console.log("entrou no getAllPhotos service");
+    const config = requestConfig("GET", null, token);
+    console.log('configurou a requisição ao servidor', config);
+    try {
+        console.log('entrou no bloco de códigos do try');
+        const res = await fetch(api + '/photos', config)
+            .then(res=>res.json())
+            .catch(err=>err);
+        console.log('recebeu a resposta do servidor', res);
+        return res;
+
+    } catch (err){
+        console.log('entrou no bloco de códigos do catch');
+        console.log(err);
+    }
+}
+
 // photoService
 const photoService = {
     publishPhoto,
     getUserPhotos,
+    getAllPhotos,
     deletePhoto,
     updatePhoto,
     getPhotoById,
