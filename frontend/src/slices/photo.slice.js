@@ -150,6 +150,22 @@ export const getAllPhotos = createAsyncThunk(
     }
 );
 
+// Search photo by title
+export const searchPhotosByTitle = createAsyncThunk(
+    'photo/search',
+    async (queryString, thunkAPI) => {
+        console.log('entrou no searchPhotos do slices');
+        console.log('recebida a query string: ', queryString);
+        const token = thunkAPI.getState().auth.user.token;
+        console.log('recebido o token dos states: ', token);
+
+        const data = await photoService.searchPhotos(queryString, token);
+        console.log('recebido os dados do photoService: ', data);
+
+        return data;
+    }
+)
+
 export const photoSlice = createSlice({
     name: "photo",
     initialState,
@@ -284,6 +300,17 @@ export const photoSlice = createSlice({
                 state.error = null;
             })
             .addCase(getAllPhotos.fulfilled, (state, action) => {
+
+                state.loading = false;
+                state.success = true;
+                state.error = null;
+                state.photos = action.payload;
+            })
+            .addCase(searchPhotosByTitle.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(searchPhotosByTitle.fulfilled, (state, action) => {
 
                 state.loading = false;
                 state.success = true;

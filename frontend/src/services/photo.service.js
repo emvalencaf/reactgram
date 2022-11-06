@@ -156,6 +156,29 @@ const getAllPhotos = async (token) => {
         console.log(err);
     }
 }
+// Search photos by title
+const searchPhotosByTitle = async (queryString, token) => {
+    console.log('entrando na searchPhotos service');
+    console.log('recebido a query string: ', query);
+    console.log('recebido o token', token);
+    const config = requestConfig('GET');
+    console.log('configurado o objeto de configuração da requisição: ', config);
+
+    try {
+        console.log('entrado no bloco de try');
+
+        const res = await fetch(api + '/photos/search?q=' + queryString, config);
+        console.log('recebido a resposta do servidor', res);
+        return res;
+
+    } catch (err){
+        console.log('entrado no bloco de error');
+        console.log(err);
+        
+    }
+
+}
+
 
 // photoService
 const photoService = {
@@ -166,7 +189,8 @@ const photoService = {
     updatePhoto,
     getPhotoById,
     likePhoto,
-    commentPhoto
+    commentPhoto,
+    searchPhotosByTitle
 };
 
 export default photoService
