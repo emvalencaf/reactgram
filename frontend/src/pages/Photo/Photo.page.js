@@ -20,6 +20,8 @@ import {
     likePhoto
 } from '../../slices/photo.slice';
 
+// Styles
+import './Photo.css';
 
 const Photo = () => {
 
@@ -103,16 +105,18 @@ const Photo = () => {
                         {photo.comments.length === 0 && <p>Não há comentários!</p>}
                         {photo.comments.map(comment => (
                             <div className="comment" key={comment._id}>
-                                <div className="author">{comment.userImage && (
-                                    <img
-                                        src={`${uploads}/users/${comment.userImage}`}
-                                        alt={`Foto de perfil de ${comment.userName}`}
-                                    />
-                                )}
+                                <div className="author">
+                                    {comment.userImage && (
+                                        <img
+                                            src={`${uploads}/users/${comment.userImage}`}
+                                            alt={`Foto de perfil de ${comment.userName}`}
+                                        />
+                                    )}
                                     <Link to={`/users/${comment.userId}`}>
                                         <p>{comment.userName}</p>
                                     </Link>
                                 </div>
+                                <p>{comment.comment}</p>
                             </div>
                         ))}
                     </>

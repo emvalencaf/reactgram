@@ -118,18 +118,22 @@ const likePhoto = async (id, token) => {
 
 // Add a comment to a photo
 const commentPhoto = async (data, id, token) => {
-
+    console.log('entrou no commentPhoto service');
+    console.log('recebeu os dados do commentPhoto slice', data);
+    console.log('recebeu a ip da photo do commentPhoto slice', id);
+    console.log('recebeu o token por meio do commentPhoto slice', token);
     const config = requestConfig('PUT', data, token);
-
+    console.log('fez a configuração para a requisição ao servidor', config);
     try {
-        
-        const res = await fetch(api + '/photos/commet/' + id, config)
+        console.log('entrou no bloco do try');
+        const res = await fetch(api + '/photos/comment/' + id, config)
             .then(res => res.json())
             .catch(err => err);
-
+        console.log('recebeu os dados do backend', res);
         return res;
     } catch (err){
-        
+        console.log('entrou no bloco de erros do try and catch do commentPhoto service');
+        console.log(err);
     }
 
 };

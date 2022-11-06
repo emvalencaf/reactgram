@@ -116,18 +116,19 @@ export const likePhoto = createAsyncThunk(
 export const commentPhoto = createAsyncThunk(
     'photo/comment',
     async (commentData, thunkAPI) =>{
-
+        console.log("entrou no commentPhoto slice");
         const token = thunkAPI.getState().auth.user.token;
-
-        const data = await photoService.updatePhoto(
+        console.log("pegou o token", token);
+        console.log('enviou os dados para o commentPhoto service', commentData)
+        const data = await photoService.commentPhoto(
             {comment: commentData.comment},
             commentData.id,
             token
         );
-
+        console.log('recebeu os dados do método commentPhoto service', data);
         // Check for errors
         if(data.errors) return thunkAPI.rejectWithValue(data.errors[0]);
-
+        console.log('checou os erros');
         return data;
 
     }
