@@ -19,6 +19,7 @@ import Profile from './pages/Profile/Profile.page';
 
 // styles
 import './App.css';
+import Photo from './pages/Photo/Photo.page';
 
 function App() {
 
@@ -70,6 +71,14 @@ function App() {
                 !auth?
                   <Register />:
                   <Navigate to="/" />}
+            />
+            <Route
+              path='/photos/:id'
+              element={
+                auth?
+                  <Photo />
+                  :<Navigate to='/login' />
+              }
             />
           </Routes>
         </div>
