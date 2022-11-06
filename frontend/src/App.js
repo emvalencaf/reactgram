@@ -1,8 +1,8 @@
-// react
-  // router
+// React
+  // Router
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-// hooks
+// Hooks
 import { useAuth } from './hooks/useAuth.hooks';
 
 // Components
@@ -15,11 +15,12 @@ import Login from './pages/Auth/Login.page';
 import Register from './pages/Auth/Register.page';
 import EditProfile from './pages/EditProfile/EditProfile.page';
 import Profile from './pages/Profile/Profile.page';
-
-
-// styles
-import './App.css';
 import Photo from './pages/Photo/Photo.page';
+import Search from './pages/Search/Search.page';
+
+
+// Styles
+import './App.css';
 
 function App() {
 
@@ -71,6 +72,14 @@ function App() {
                 !auth?
                   <Register />:
                   <Navigate to="/" />}
+            />
+            <Route 
+              path='/search'
+              element={
+                auth?
+                  <Search />
+                  : <Navigate to='/login' />
+              }
             />
             <Route
               path='/photos/:id'

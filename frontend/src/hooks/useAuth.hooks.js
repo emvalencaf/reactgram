@@ -1,7 +1,8 @@
-// hooks
+// Hooks
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
+// Will get users auth when user's state is changed
 export const useAuth = () => {
 
     const { user } = useSelector((state) => state.auth);
