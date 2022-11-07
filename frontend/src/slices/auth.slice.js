@@ -1,6 +1,7 @@
 // modules
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import authService from '../services/auth.service';
+import { AuthService } from '../services/auth.service';
+// import authService from '../services/auth.service';
 
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -16,8 +17,8 @@ export const register = createAsyncThunk(
     "auth/register",
     async (user, thunkAPI) => {
 
-    const data = await authService.register(user);
-
+    // const data = await authService.register(user);
+    const data = await AuthService.register(user);
     console.log(data);
 
     // Check for errors
@@ -29,8 +30,8 @@ export const register = createAsyncThunk(
 // Logout an user
 export const logout = createAsyncThunk("auth/logout", async () => {
 
-    await authService.logout();
-
+    // await authService.logout();
+    await AuthService.logout();
 });
 
 // Sign in an user
@@ -38,8 +39,8 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 
     console.log(user);
 
-    const data = await authService.login(user);
-
+    // const data = await authService.login(user);
+    const data = await AuthService.login(user);
     console.log(data);
 
     // Check for errors

@@ -1,4 +1,4 @@
-// modules
+// Utils
 import { api, requestConfig } from "../utils/config.utils";
 
 // functions

@@ -1,72 +1,63 @@
-// modules
+// Utils
 import { api, requestConfig } from "../utils/config.utils";
+import { createFetch } from "../utils/createFetch.utils";
 
-// authService
+// AuthService class
 
-// register an user
-const register = async (data) => {
+export class AuthService{
+    // Sign an user in
+    static async login(data){
+        const config = requestConfig('POST', data);
 
-    const config = requestConfig("POST", data);
-
-    try {
-
-        const res = await fetch(api + '/users/register', config)
-            .then(res => res.json())
-            .catch(err => err);
-
-        if (res._id) {
-
-            localStorage.setItem('user', JSON.stringify(res));
-
+        try{
+    
+            const res = await createFetch(
+                api + '/users/login',
+                config
+            );
+    
+    
+            if(res._id){
+    
+                localStorage.setItem("user", JSON.stringify(res));
+            };
+    
+            return res;
+    
+        } catch(err){
+    
+            console.log(err);
         };
+    };
+    // Register an user and sign him in
+    static async register(data){
+        const config = requestConfig("POST", data);
 
-        return res;
+        try {
+    
+            const res = await createFetch(
+                api + '/users/register',
+                config
+            );
+    
+            if (res._id) {
+    
+                localStorage.setItem('user', JSON.stringify(res));
+    
+            };
+    
+            return res;
+    
+        } catch (err) {
+    
+            console.log(err);
+    
+        };
+    };
+    // Logout an user
+    static logout(){
 
-    } catch (err) {
-
-        console.log(err);
+        localStorage.removeItem("user");
 
     };
-
 };
-
-// log out an user;
-const logout = () => {
-
-    localStorage.removeItem("user");
-
-};
-
-// Sign in an user
-const login = async (data) => {
-
-    const config = requestConfig('POST', data);
-
-    try{
-
-        const res = await fetch(api + '/users/login', config)
-            .then(res => res.json())
-            .catch(err => err);
-
-        if(res._id){
-
-            localStorage.setItem("user", JSON.stringify(res));
-        };
-
-        return res;
-
-    } catch(err){
-
-        console.log(err);
-    };
-
-}
-
-const authService = {
-    register,
-    logout,
-    login
-}
-
-export default authService;
-
