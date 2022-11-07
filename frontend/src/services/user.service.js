@@ -1,6 +1,72 @@
 import { api, requestConfig } from '../utils/config.utils';
+import { createFetch } from '../utils/createFetch.utils';
 
 
+export class UserService{
+    
+    // Get user profile details
+    static async getUserProfile(data, token){
+        const config = requestConfig("GET", data, token);
+
+        try{
+    
+            const res = await createFetch(
+                api + '/users/profile', 
+                config
+            );
+
+    
+            return res;
+    
+        } catch(err){
+    
+            console.log(err);
+    
+        };
+    };
+
+    // Update user's details
+    static async updateProfile(data, token) {
+
+        const config = requestConfig("PUT", data, token, true);
+
+        try{
+            
+            const res = await fetch(
+                api + '/users/', 
+                config
+            );
+            
+            
+            return res;
+    
+        }catch (err) {
+            console.log(err);
+        };
+
+    };
+
+    // Get user's details by an id
+    static async getUserDetails(id) {
+
+        const config = requestConfig("GET");
+
+        try{
+    
+            const res = await createFetch(
+                api + '/users/' + id, 
+                config
+            );
+    
+            
+            return res;
+    
+        } catch(err){
+            console.log(err);
+        };
+    };
+};
+/* 
 // Get user details
 const profile = async (data, token) => {
 
@@ -68,3 +134,4 @@ const userService = {
 };
 
 export default userService;
+*/

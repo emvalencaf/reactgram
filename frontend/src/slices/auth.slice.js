@@ -19,7 +19,7 @@ export const register = createAsyncThunk(
 
     // const data = await authService.register(user);
     const data = await AuthService.register(user);
-    console.log(data);
+    
 
     // Check for errors
     if (data.errors) return thunkAPI.rejectWithValue(data.errors[0]);
@@ -37,11 +37,10 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 // Sign in an user
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 
-    console.log(user);
 
     // const data = await authService.login(user);
     const data = await AuthService.login(user);
-    console.log(data);
+    
 
     // Check for errors
     if (data.errors) return thunkAPI.rejectWithValue(data.errors[0]);

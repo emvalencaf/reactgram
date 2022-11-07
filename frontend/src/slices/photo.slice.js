@@ -1,6 +1,6 @@
 // modules
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import photoService from '../services/photo.service';
+import { PhotoService } from '../services/photo.service';
 
 
 const initialState = {
@@ -21,7 +21,7 @@ export const publishPhoto = createAsyncThunk(
 
     const token = thunkAPI.getState().auth.user.token;
 
-    const data = await photoService.publishPhoto(photo, token);
+    const data = await PhotoService.publishPhoto(photo, token);
 
     // Check for errors
     if (data.errors) return thunkAPI.rejectWithValue(data.errors[0]);
@@ -36,7 +36,7 @@ export const getAllUserPhotos = createAsyncThunk(
 
         const token = thunkAPI.getState().auth.user.token;
 
-        const data = await photoService.getUserPhotos(id, token);
+        const data = await PhotoService.getUserPhotos(id, token);
 
         // Check for errors
         if (data.errors) return thunkAPI.rejectWithValue(data.errors[0]);
@@ -52,7 +52,7 @@ export const deletePhoto = createAsyncThunk(
 
     const token = thunkAPI.getState().auth.user.token;
 
-    const data = await photoService.deletePhoto(id, token);
+    const data = await PhotoService.deletePhoto(id, token);
 
     // Check for errors
     if (data.errors) return thunkAPI.rejectWithValue(data.errors[0]);
@@ -69,7 +69,7 @@ export const updatePhoto = createAsyncThunk(
 
         const token = thunkAPI.getState().auth.user.token;
 
-        const data = await photoService.updatePhoto(
+        const data = await PhotoService.updatePhoto(
             {title: photoData.title},
             photoData.id,
             token
@@ -90,7 +90,7 @@ export const getPhotoById = createAsyncThunk(
 
         const token = thunkAPI.getState().auth.user.token;
 
-        const data = await photoService.getPhotoById(id, token);
+        const data = await PhotoService.getPhotoById(id, token);
 
         return data;
     }
@@ -103,7 +103,7 @@ export const likePhoto = createAsyncThunk(
 
         const token = thunkAPI.getState().auth.user.token;
 
-        const data = await photoService.likePhoto(id, token);
+        const data = await PhotoService.likePhoto(id, token);
 
         // Check for errors
         if(data.errors) return thunkAPI.rejectWithValue(data.errors[0]);
@@ -116,16 +116,15 @@ export const likePhoto = createAsyncThunk(
 export const commentPhoto = createAsyncThunk(
     'photo/comment',
     async (commentData, thunkAPI) =>{
-        console.log("entrou no commentPhoto slice");
+        
         const token = thunkAPI.getState().auth.user.token;
-        console.log("pegou o token", token);
-        console.log('enviou os dados para o commentPhoto service', commentData)
-        const data = await photoService.commentPhoto(
+
+        const data = await PhotoService.commentPhoto(
             {comment: commentData.comment},
             commentData.id,
             token
         );
-        console.log('recebeu os dados do método commentPhoto service', data);
+        
         // Check for errors
         if(data.errors) return thunkAPI.rejectWithValue(data.errors[0]);
         console.log('checou os erros');
@@ -141,7 +140,7 @@ export const getAllPhotos = createAsyncThunk(
         
         const token = thunkAPI.getState().auth.user.token;
 
-        const data = await photoService.getAllPhotos(token);
+        const data = await PhotoService.getAllPhotos(token);
 
         return data;
 
@@ -152,12 +151,11 @@ export const getAllPhotos = createAsyncThunk(
 export const searchPhotosByTitle = createAsyncThunk(
     'photo/search',
     async (queryString, thunkAPI) => {
-        console.log('entrou no searchPhotos do slices');
-        console.log('recebida a query string: ', queryString);
+
         const token = thunkAPI.getState().auth.user.token;
         console.log('recebido o token dos states: ', token);
 
-        const data = await photoService.searchPhotosByTitle(queryString, token);
+        const data = await PhotoService.searchPhotosByTitle(queryString, token);
         console.log('recebido os dados do photoService: ', data);
     
         return data;
