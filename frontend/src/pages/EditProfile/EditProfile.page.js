@@ -173,7 +173,7 @@ const EditProfile = () => {
                 {message && <Message msg={message} />}
             </form>
         </div>
-    )
-}
+    );
+};
 
-export default EditProfile
+export default EditProfile;

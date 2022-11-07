@@ -35,7 +35,7 @@ const Home = () => {
   // Load all photos
   useEffect(
     () => {
-      dispatch(getAllPhotos);
+      dispatch(getAllPhotos());
     },
     [dispatch]
   );

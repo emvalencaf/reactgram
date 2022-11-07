@@ -9,7 +9,11 @@ app.use(express.json());// to work with json
 app.use(express.urlencoded({extended: false}));// to work with form data
 
 // Solve CORS
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));// if API and front-end will run in different domains get this line commented.
+app.use(cors({
+    credentials: true, 
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200}
+));// if API and front-end will run in different domains get this line commented.
 
 
 // routes

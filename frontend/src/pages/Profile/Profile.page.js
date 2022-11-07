@@ -29,7 +29,7 @@ import { getUserDetails } from '../../slices/user.slice';
 import {
     publishPhoto,
     resetMessage,
-    getUserPhotos,
+    getAllUserPhotos,
     deletePhoto,
     updatePhoto
 } from '../../slices/photo.slice';
@@ -69,7 +69,7 @@ const Profile = () => {
     useEffect(() => {
 
         dispatch(getUserDetails(id));
-        dispatch(getUserPhotos(id));
+        dispatch(getAllUserPhotos(id));
 
     }, [dispatch, id]);
 
@@ -194,8 +194,8 @@ const Profile = () => {
                                     onChange={handleFile}
                                 />
                             </label>
-                            {!loading && <button type='submit'>Postar</button>}
-                            {loading && <button type='submit' disabled>Aguarde...</button>}
+                            {!loadingPhoto && <button type='submit'>Postar</button>}
+                            {loadingPhoto && <button type='submit' disabled>Aguarde...</button>}
                         </form>
                     </div>
                     <div className="edit-photo hide" ref={editPhotoForm}>

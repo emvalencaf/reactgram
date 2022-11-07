@@ -77,7 +77,7 @@ const Photo = () => {
 
 
     return (
-        <div id='photo'>
+        <div id='photo' key={photo._id}>
             <PhotoItem photo={photo} />
             <LikeContainer
                 photo={photo}

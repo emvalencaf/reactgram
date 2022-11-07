@@ -23,8 +23,8 @@ const publishPhoto = async (data, token) => {
 
 };
 
-// Get user photos
-const getUserPhotos = async (id, token) => {
+// Get all user photos
+const getAllUserPhotos = async (id, token) => {
 
     const config = requestConfig("GET", null, token);
 
@@ -40,6 +40,43 @@ const getUserPhotos = async (id, token) => {
         console.log(err);
     }
 
+};
+
+// Get a photo by id
+const getPhotoById = async (id, token) => {
+
+    const config = requestConfig('GET', null, token);
+
+    try{
+
+        const res = await fetch(api + '/photos/' + id, config)
+            .then(res => res.json())
+            .catch(err => err);
+        
+        return res;
+    } catch(err){
+        console.log(err);
+    };
+
+};
+
+// Get all photos
+const getAllPhotos = async (token) => {
+    
+    const config = requestConfig("GET", null, token);
+    
+    try {
+
+        const res = await fetch(api + '/photos', config)
+            .then(res=>res.json())
+            .catch(err=>err);
+        
+
+        return res;
+
+    } catch (err){
+        console.log(err);
+    }
 };
 
 // Delete a photo
@@ -79,24 +116,6 @@ const updatePhoto = async (data, id, token) => {
 
 
 };
-
-// Get a photo by id
-const getPhotoById = async (id, token) => {
-
-    const config = requestConfig('GET', null, token);
-
-    try{
-
-        const res = await fetch(api + '/photos/' + id, config)
-            .then(res => res.json())
-            .catch(err => err);
-        
-        return res;
-    } catch(err){
-        console.log(err);
-    };
-
-};
  
 // Like a photo
 const likePhoto = async (id, token) => {
@@ -118,61 +137,38 @@ const likePhoto = async (id, token) => {
 
 // Add a comment to a photo
 const commentPhoto = async (data, id, token) => {
-    console.log('entrou no commentPhoto service');
-    console.log('recebeu os dados do commentPhoto slice', data);
-    console.log('recebeu a ip da photo do commentPhoto slice', id);
-    console.log('recebeu o token por meio do commentPhoto slice', token);
+
     const config = requestConfig('PUT', data, token);
-    console.log('fez a configuração para a requisição ao servidor', config);
+
     try {
-        console.log('entrou no bloco do try');
+
         const res = await fetch(api + '/photos/comment/' + id, config)
             .then(res => res.json())
             .catch(err => err);
-        console.log('recebeu os dados do backend', res);
+
         return res;
     } catch (err){
-        console.log('entrou no bloco de erros do try and catch do commentPhoto service');
+
         console.log(err);
     }
 
 };
 
-// Get all photos
-const getAllPhotos = async (token) => {
-    console.log("entrou no getAllPhotos service");
-    const config = requestConfig("GET", null, token);
-    console.log('configurou a requisição ao servidor', config);
-    try {
-        console.log('entrou no bloco de códigos do try');
-        const res = await fetch(api + '/photos', config)
-            .then(res=>res.json())
-            .catch(err=>err);
-        console.log('recebeu a resposta do servidor', res);
-        return res;
-
-    } catch (err){
-        console.log('entrou no bloco de códigos do catch');
-        console.log(err);
-    }
-}
 // Search photos by title
 const searchPhotosByTitle = async (queryString, token) => {
-    console.log('entrando na searchPhotos service');
-    console.log('recebido a query string: ', query);
-    console.log('recebido o token', token);
-    const config = requestConfig('GET');
-    console.log('configurado o objeto de configuração da requisição: ', config);
+
+    const config = requestConfig('GET', null, token);
 
     try {
-        console.log('entrado no bloco de try');
 
-        const res = await fetch(api + '/photos/search?q=' + queryString, config);
-        console.log('recebido a resposta do servidor', res);
+        const res = await fetch(api + '/photos/search?q=' + queryString, config)
+            .then(res => res.json())
+            .catch(err=>err);
+
         return res;
 
     } catch (err){
-        console.log('entrado no bloco de error');
+
         console.log(err);
         
     }
@@ -183,7 +179,7 @@ const searchPhotosByTitle = async (queryString, token) => {
 // photoService
 const photoService = {
     publishPhoto,
-    getUserPhotos,
+    getAllUserPhotos,
     getAllPhotos,
     deletePhoto,
     updatePhoto,
@@ -193,4 +189,4 @@ const photoService = {
     searchPhotosByTitle
 };
 
-export default photoService
+export default photoService;

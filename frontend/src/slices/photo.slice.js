@@ -30,7 +30,7 @@ export const publishPhoto = createAsyncThunk(
 
 });
 // Get user photos
-export const getUserPhotos = createAsyncThunk(
+export const getAllUserPhotos = createAsyncThunk(
     "photo/userphotos",
     async (id, thunkAPI) => {
 
@@ -139,12 +139,10 @@ export const getAllPhotos = createAsyncThunk(
     'photos/getall',
     async ( _, thunkAPI) => {
         
-        console.log('entrou no getAllPhoto slicer');
         const token = thunkAPI.getState().auth.user.token;
-        console.log('pegou o token', token);
 
         const data = await photoService.getAllPhotos(token);
-        console.log('recebeu os dados do photoService', data);
+
         return data;
 
     }
@@ -159,9 +157,9 @@ export const searchPhotosByTitle = createAsyncThunk(
         const token = thunkAPI.getState().auth.user.token;
         console.log('recebido o token dos states: ', token);
 
-        const data = await photoService.searchPhotos(queryString, token);
+        const data = await photoService.searchPhotosByTitle(queryString, token);
         console.log('recebido os dados do photoService: ', data);
-
+    
         return data;
     }
 )
@@ -194,11 +192,11 @@ export const photoSlice = createSlice({
                 state.error = action.payload;
                 state.photo = null;
             })
-            .addCase(getUserPhotos.pending, (state) => {
+            .addCase(getAllUserPhotos.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(getUserPhotos.fulfilled, (state, action) => {
+            .addCase(getAllUserPhotos.fulfilled, (state, action) => {
 
                 state.loading = false;
                 state.success = true;
@@ -311,7 +309,7 @@ export const photoSlice = createSlice({
                 state.error = null;
             })
             .addCase(searchPhotosByTitle.fulfilled, (state, action) => {
-
+                console.log(action.payload);
                 state.loading = false;
                 state.success = true;
                 state.error = null;
