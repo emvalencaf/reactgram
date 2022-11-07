@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 // model
 const User = require('../models/User.model');
+const { deleteFile } = require('../utils/deleteFile.utils');
 
 // AUTH
 const jwtSecret = process.env.JWT_SECRET;
@@ -122,7 +123,12 @@ const updateUser = async(req, res) => {
         user.password = passwordHash;
     };
 
-    if(profileImage) user.profileImage = profileImage;
+    if(profileImage) {
+
+        if(user.profileImage) deleteFile('users', user.profileImage);
+        
+        user.profileImage = profileImage;
+    };
 
     if(bio) user.bio = bio;
 

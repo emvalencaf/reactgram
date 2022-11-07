@@ -2,7 +2,8 @@
 const mongoose = require('mongoose');
 const User = require('../models/User.model');
 const Photo = require('../models/Photo.model');
-
+const fs = require('fs');
+const { deleteFile } = require('../utils/deleteFile.utils');
 
 
 // Insert a photo with an user related to it
@@ -48,7 +49,9 @@ const deletePhoto = async (req, res) => {
         if(!photo.userId.equals(reqUser._id)) return res.status(422).json({errors:['Ocorreu um erro, por favor tente novamente mais tarde.']});
     
         await Photo.findByIdAndDelete(photo._id);
-    
+        
+        deleteFile('photos', photo.image);
+
         return res.status(200).json({
             id: photo._id,
             message:"Foto excluída com sucesso."
