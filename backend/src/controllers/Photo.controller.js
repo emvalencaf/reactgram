@@ -70,7 +70,7 @@ const getAllPhotos = async (req, res) => {
 
 };
 
-// Get user photos
+// Get all user photos
 const getAllUserPhotos = async (req, res) => {
 
     const { id } = req.params;
@@ -82,6 +82,8 @@ const getAllUserPhotos = async (req, res) => {
     return res.status(200).json(photos);
 };
 
+
+// Get a photo by id
 const getPhotoById = async (req, res) => {
 
     const { id } = req.params
@@ -182,12 +184,12 @@ const commentPhoto = async (req, res) => {
 };
 
 // Search photos by title
-const searchPhotos = async (req, res) => {
+const searchPhotosByTitle = async (req, res) => {
 
-    const {q} = req.query;
-
+    const { q } = req.query;
+    console.log('queryString', q);
     const photos = await Photo.find({title: new RegExp(q, 'i')}).exec();
-
+    console.log(photos);
     res.status(200).json(photos);
 
 };
@@ -201,5 +203,5 @@ module.exports = {
     updatePhoto,
     likePhoto,
     commentPhoto,
-    searchPhotos
+    searchPhotosByTitle
 }
