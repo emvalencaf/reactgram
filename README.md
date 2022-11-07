@@ -1,6 +1,6 @@
 # Reactgram
 
-Esse projeto foi desenvolvido durante o (curso de React do Mattheus Battisti)[https://www.udemy.com/course/react-do-zero-a-maestria-c-hooks-router-api-projetos/], na plataforma da Udemy.
+Esse projeto foi desenvolvido durante o [Curso de React do Mattheus Battisti](https://www.udemy.com/course/react-do-zero-a-maestria-c-hooks-router-api-projetos/), na plataforma da Udemy.
 
 O objetivo é desenvolver uma mock do instagram fullstack usando o framework do ReactJS, no front-end, e o NodeJS, no back-end.
 
