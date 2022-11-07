@@ -11,4 +11,14 @@ A parte frontend deste projeto foi desenvolvida usando como framework o ReactJS 
 ### Como usar:
 
 1. Leia o README.md no diretório ``backend`` do projeto e siga as instruções;
-c
+
+2. Abra um terminal no diretório ``frontend`` e baixe os pacotes em dependência deste diretório usando o comando: `npm install`;
+
+3. Em seguida, vá ao diretório ``frontend > src > utils`` e configurar as strings no  arquivo ```config.utils.js``:
+````
+// URL for API
+export const api = // Coloque a URL da sua API
+export const uploads = // Coloque o path para o diretório de imagens da sua API
+
+````
+4. No terminal aberto no diretório do ``frontend`` digite o comando: `npm start`.
