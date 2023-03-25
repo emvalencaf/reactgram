@@ -1,4 +1,10 @@
-const express = require("express");
+// modules
+import express from "express";
+
+// types
+import { Express, Request, Response } from "express";
+
+// routers
 const router = express();
 
 
@@ -9,11 +15,11 @@ router.use('/api/users', require('./user/User.routes'));
 router.use('/api/photos', require('./photo/Photo.routes'));
 
 // test route
-router.get("/", (req, res) => {
+router.get("/", (req: Request, res: Response) => {
 
     res.send('API working!!');
 
 });
 
 
-module.exports = router;
+export { router as Router};

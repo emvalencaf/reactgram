@@ -3,7 +3,7 @@ import { JwtPayload } from "jsonwebtoken";
 import { verifyToken } from "../../auth";
 import UserController from "../../controllers/user";
 
-const authGuard = async (req: Request, res: Response, next: NextFunction) => {
+export const authGuard = async (req: Request, res: Response, next: NextFunction) => {
 
 	// get token from the headers request
 	const authHeader = req.headers["authorization"];
