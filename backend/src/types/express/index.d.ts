@@ -8,6 +8,11 @@ declare global {
 				name: string;
 				email: string;
 			}
+			token: {
+				jwt: string;
+				iat: number;
+				exp: nnumber;
+			}
 		}
 	}
 }
