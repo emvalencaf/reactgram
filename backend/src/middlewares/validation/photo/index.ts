@@ -1,19 +1,21 @@
-const { body } = require('express-validator');
+// module
+import { body } from 'express-validator';
 
 
-const photoInsertValidation = () => {
+// create a photo validation
+export const photoInsertValidation = () => {
 
     return [
         body('title')
             .not()
-            .equals('undefined').withMessage('O título é obrigatório.')
-            .isString().withMessage('O título é obrigatório')
-            .isLength({min: 3}).withMessage("O título precisa ter no mínimo 3 caracteres."),
+            .equals('undefined').withMessage('photo title is a required field')
+            .isString().withMessage('photo title is a required field')
+            .isLength({min: 3}).withMessage("photo title must have at least 3 character"),
         body('image')
-            .custom((value, {req}) => {
+            .custom((value: string, {req}) => {
 
-                if(!req.file) throw new Error("A imagem é obrigatória.")
-                
+                if(!req.file) throw new Error("you must upload a image")
+
                 return true;
             })
     ];
