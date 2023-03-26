@@ -17,7 +17,7 @@ const fileFilter = (
 }
 
 // create a multer uploader instance
-export const uploader = multer({
+export const uploaderMulter = multer({
 	storage: multerStorage,
 	fileFilter: fileFilter,
 });

@@ -66,7 +66,7 @@ export const userUpdateValidation = () => {
 				if (!password) throw new Error("couldn't fetched user details");
 
 				if (!(await CryptPassword.comparePassword(value), password)) throw new Error("incorrect password");
-			}),
+			}),/*
 		body("newPassword")
 			.isOptional()
 			.isString().withMessage("user password is a required field")
@@ -77,7 +77,7 @@ export const userUpdateValidation = () => {
 			.custom((value: string, { req }: { req: Request }) => {
 				if (value != req.body.password) throw new Error("user password and confirm password fields must have equal values.");
 				return true;
-			})
+			})*/
 	]
 
 };

@@ -4,11 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "concurrently \"npx tsc --watch\"nodemon -q dist/server.js",
     "start": "node dist/server.js",
-	"tsc": "tsc",
-	"build": "npx tsc",
-	"lint": "eslint src/ --fix"
+    "test": "test",
+    "tsc": "tsc",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
+    "build": "npx tsc",
+    "lint": "eslint src/ --fix"
   },
   "keywords": [],
   "author": "Edson Mota Valença Filho <emvalenca.dev@gmail.com>",

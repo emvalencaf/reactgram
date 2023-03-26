@@ -6,13 +6,13 @@ import { Express, Request, Response } from "express";
 
 // routers
 const router = express();
-
+import { userRouter } from "./user";
 
 // users routes
-router.use('/api/users', require('./user/User.routes'));
+router.use('/api/users', userRouter);
 
 // photos routes
-router.use('/api/photos', require('./photo/Photo.routes'));
+// outer.use('/api/photos', require('./photo/Photo.routes'));
 
 // test route
 router.get("/", (req: Request, res: Response) => {
