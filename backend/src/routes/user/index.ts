@@ -10,6 +10,7 @@ import UserController from "../../controllers/user";
 
 // auth middleware
 import { authGuard } from "../../middlewares/authGuard";
+import { uploaderMulter, uploadFileImageMiddleware } from "../../middlewares/uploadFiles/images";
 
 // validation middleware
 import validate from "../../middlewares/validation";
@@ -20,7 +21,6 @@ import {
 } from "../../middlewares/validation/user";
 
 // file upload middleware
-const { imageUpload } = require('../../middlewares/imageUpload');
 
 
 // Router
@@ -53,7 +53,8 @@ router.put('/',
     authGuard,
     userUpdateValidation(),
     validate,
-    imageUpload.single('profileImage'),
+	uploaderMulter.single('profileImage'),
+	uploadFileImageMiddleware,
     UserController.updateProfile,
 );
 

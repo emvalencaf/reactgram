@@ -4,8 +4,8 @@ declare global {
 			PORT: number;
 			// database environment variables
 			DB_USER: string;
+			DB_PASSWORD: string;
 			DB_URL: string;
-			RETRYWRITES: string;
 
 			// jwt secret
 			JWT_SECRET: string;
